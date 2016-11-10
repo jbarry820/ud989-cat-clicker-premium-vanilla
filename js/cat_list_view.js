@@ -41,7 +41,19 @@ CatListView.prototype = {
                 return function() {
                     that.controller.setCurrentCat(catCopy);
                     //console.log(catCopy);
-                    CatView.prototype.render();
+
+                    /* Begin Bug Fix ******************************************/
+                    /*
+                    /* CatView.prototype.render is a class method, you need to 
+                    /* instead render the instance of CatView that exists in the 
+                    /* CatController.
+                    /*
+                    /**/
+                    
+                    //CatView.prototype.render();
+                    that.controller.catView.render();
+                    
+                    /* End Bug Fix ********************************************/
                 };
             })(cat));
 
